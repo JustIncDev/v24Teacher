@@ -10,6 +10,7 @@ class AppColors {
   static const Color hooloovooBlue = Color(0xFF3953FE);
   static const Color blueRaspberry = Color(0xFF0BC6F5);
   static const Color royalBlue = Color(0xFF405BE1);
+  static const Color royalPurple = Color(0xFF753BDA);
 
   static const Color black = Color(0xFF000000);
 }

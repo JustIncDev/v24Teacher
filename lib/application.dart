@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:v24_teacher_app/feature/splash/splash_screen.dart';
+import 'package:v24_teacher_app/feature/phone_confirmation_screen/phone_confirmation_screen.dart';
 import 'package:v24_teacher_app/global/injector.dart';
 
 class V24TeacherApplication extends StatefulWidget {
@@ -18,7 +18,7 @@ class _V24TeacherApplicationState extends State<V24TeacherApplication> {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: SplashScreen(),
+      home: PhoneConfirmationScreen(),
       themeMode: ThemeMode.light,
     );
   }
