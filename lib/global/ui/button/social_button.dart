@@ -27,11 +27,15 @@ class SocialButton extends StatelessWidget {
       height: _appleButtonHeight,
       decoration: BoxDecoration(
         color: _getButtonColor(),
+        borderRadius: BorderRadius.circular(6.0),
       ),
       child: InkWell(
         borderRadius: BorderRadius.circular(6.0),
         child: Center(
-          child: _getSocialIcon(),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 13.0, horizontal: 40.0),
+            child: _getSocialIcon(),
+          ),
         ),
       ),
     );
@@ -53,9 +57,15 @@ class SocialButton extends StatelessWidget {
       case SocialMediaType.apple:
         return _buildAppleIcon();
       case SocialMediaType.facebook:
-        return const ImageIcon(AppIcons.facebookIconAsset);
+        return const ImageIcon(
+          AppIcons.facebookIconAsset,
+          color: AppColors.white,
+        );
       case SocialMediaType.google:
-        return const ImageIcon(AppIcons.googleIconAsset);
+        return const ImageIcon(
+          AppIcons.googleIconAsset,
+          color: AppColors.white,
+        );
     }
   }
 
@@ -73,7 +83,7 @@ class SocialButton extends StatelessWidget {
           height: _fontSize,
           child: const CustomPaint(
             painter: AppleLogoPainter(
-              color: AppColors.black,
+              color: AppColors.white,
             ),
           ),
         ),

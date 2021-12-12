@@ -58,26 +58,48 @@ class PrimaryButton extends StatelessWidget {
             side: borderSide ?? BorderSide.none,
           ),
         ),
-        padding: MaterialStateProperty.all<EdgeInsetsGeometry>(EdgeInsets.zero),
+        // padding: MaterialStateProperty.all<EdgeInsetsGeometry>(EdgeInsets.zero),
+        padding: MaterialStateProperty.resolveWith<EdgeInsetsGeometry>((states) {
+          if (states.contains(MaterialState.disabled)) {
+            return const EdgeInsets.symmetric(vertical: 16.5);
+          }
+          return EdgeInsets.zero;
+        }),
         overlayColor: MaterialStateProperty.resolveWith(
           (states) {
             return states.contains(MaterialState.pressed) ? _getOverlayColor() : null;
           },
         ),
       ),
-      child: Ink(
-        decoration: BoxDecoration(
-          gradient: _getGradientColor(),
-          borderRadius: const BorderRadius.all(Radius.circular(12.0)),
-        ),
-        child: Text(
-          titleId != null ? getStringById(context, titleId!) : titleText ?? '',
-          style: const TextStyle(
-            fontSize: 13,
-            height: 15.0,
-          ).montserrat(fontWeight: AppFonts.semiBold),
-        ),
-      ),
+      child: onPressed != null
+          ? Ink(
+              decoration: BoxDecoration(
+                gradient: _getGradientColor(),
+                borderRadius: const BorderRadius.all(Radius.circular(12.0)),
+              ),
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16.5),
+                    child: Text(
+                      titleId != null ? getStringById(context, titleId!) : titleText ?? '',
+                      style: const TextStyle(
+                        fontSize: 13.0,
+                      ).montserrat(fontWeight: AppFonts.semiBold),
+                    ),
+                  ),
+                ),
+              ),
+            )
+          : Center(
+              child: Text(
+                titleId != null ? getStringById(context, titleId!) : titleText ?? '',
+                style: const TextStyle(
+                  fontSize: 13.0,
+                ).montserrat(fontWeight: AppFonts.semiBold),
+              ),
+            ),
     );
   }
 
@@ -88,9 +110,9 @@ class PrimaryButton extends StatelessWidget {
           begin: Alignment.bottomLeft,
           end: Alignment.topRight,
           colors: [
-            AppColors.sixteenMillionPink,
-            AppColors.hooloovooBlue,
             AppColors.blueRaspberry,
+            AppColors.hooloovooBlue,
+            AppColors.sixteenMillionPink,
           ],
         );
     }

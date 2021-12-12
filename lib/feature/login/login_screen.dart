@@ -39,16 +39,18 @@ class _LoginScreenState extends State<LoginScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        Text(
-                          getStringById(context, StringId.login),
-                          style: const TextStyle(
-                            color: AppColors.black,
-                            fontSize: 18.0,
-                            height: 15.0,
-                            letterSpacing: -0.3,
-                          ).montserrat(fontWeight: AppFonts.semiBold),
+                        const VerticalSpace(58.5),
+                        Center(
+                          child: Text(
+                            getStringById(context, StringId.login),
+                            style: const TextStyle(
+                              color: AppColors.black,
+                              fontSize: 18.0,
+                              letterSpacing: -0.3,
+                            ).montserrat(fontWeight: AppFonts.semiBold),
+                          ),
                         ),
-                        const VerticalSpace(34.0),
+                        const VerticalSpace(55.5),
                         AppTextField(
                           labelText: getStringById(context, StringId.email),
                           hintText: 'example@gmail.com',
@@ -57,7 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         const VerticalSpace(18.0),
                         AppTextField(
                           labelText: getStringById(context, StringId.password),
-                          obscureText: true,
+                          obscureText: !_passwordVisible,
                           keyboardType: TextInputType.visiblePassword,
                           suffixIcon: IconButton(
                             padding: const EdgeInsets.all(0),
@@ -78,26 +80,36 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                         const VerticalSpace(28.0),
-                        const PrimaryButton(
+                        PrimaryButton(
                           titleId: StringId.login,
+                          onPressed: () => VoidCallback,
                           // onPressed: state.isFillAllFields() ? () => BlocProvider.of<LoginBloc>(context).add(LoginPerformEvent()) : null,
                         ),
                         const VerticalSpace(35.0),
                         Row(
                           children: [
-                            const Divider(color: AppColors.disabledColor),
-                            const HorizontalSpace(20.0),
+                            const Expanded(
+                              child: const Divider(
+                                color: AppColors.disabledColor,
+                                thickness: 1.0,
+                                endIndent: 20.0,
+                              ),
+                            ),
                             Text(
                               getStringById(context, StringId.or),
                               style: const TextStyle(
                                 color: AppColors.black,
                                 fontSize: 13.0,
-                                height: 15.0,
                                 letterSpacing: -0.3,
                               ).montserrat(fontWeight: AppFonts.regular),
                             ),
-                            const HorizontalSpace(20.0),
-                            const Divider(color: AppColors.disabledColor),
+                            const Expanded(
+                              child: const Divider(
+                                color: AppColors.disabledColor,
+                                thickness: 1.0,
+                                indent: 20.0,
+                              ),
+                            ),
                           ],
                         ),
                         const VerticalSpace(28.0),
@@ -110,14 +122,15 @@ class _LoginScreenState extends State<LoginScreen> {
                           ],
                         ),
                         const Spacer(),
-                        Text(
-                          getStringById(context, StringId.noAccount),
-                          style: const TextStyle(
-                            color: AppColors.black,
-                            fontSize: 13.0,
-                            height: 15.0,
-                            letterSpacing: -0.3,
-                          ).montserrat(fontWeight: AppFonts.regular),
+                        Center(
+                          child: Text(
+                            getStringById(context, StringId.noAccount),
+                            style: const TextStyle(
+                              color: AppColors.black,
+                              fontSize: 13.0,
+                              letterSpacing: -0.3,
+                            ).montserrat(fontWeight: AppFonts.regular),
+                          ),
                         ),
                         const VerticalSpace(10.0),
                         TextButton(
@@ -128,7 +141,6 @@ class _LoginScreenState extends State<LoginScreen> {
                               color: AppColors.royalBlue,
                               decoration: TextDecoration.underline,
                               fontSize: 13.0,
-                              height: 15.0,
                               letterSpacing: -0.3,
                             ).montserrat(fontWeight: AppFonts.semiBold),
                           ),

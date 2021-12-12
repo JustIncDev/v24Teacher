@@ -73,7 +73,7 @@ class AppTextField extends StatelessWidget {
         if (onActionClicked != null) onActionClicked!.call(value);
       },
       style: const TextStyle(
-        color: AppColors.white,
+        color: AppColors.black,
         fontSize: 13,
       ).montserrat(fontWeight: AppFonts.regular),
       controller: controller,
