@@ -38,4 +38,6 @@ class AppColors {
   static const Color shadowColor = Color(0xFF5326A8);
   static const Color accent = Color(0xFFC94747);
   static const Color accent50 = Color(0x80ff444a);
+  static const Color facebookColor = Color(0xFF1877F2);
+  static const Color googleColor = Color(0xFFCE5542);
 }

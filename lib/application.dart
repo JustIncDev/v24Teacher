@@ -20,7 +20,7 @@ class _V24TeacherApplicationState extends State<V24TeacherApplication> {
   Widget build(BuildContext context) {
     return const MaterialApp(
       home: LoginScreen(),
-      themeMode: ThemeMode.light,
+      themeMode: ThemeMode.dark,
     );
   }
 }

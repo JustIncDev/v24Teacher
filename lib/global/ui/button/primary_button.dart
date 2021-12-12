@@ -72,7 +72,10 @@ class PrimaryButton extends StatelessWidget {
         ),
         child: Text(
           titleId != null ? getStringById(context, titleId!) : titleText ?? '',
-          style: const TextStyle(fontSize: 13).montserrat(fontWeight: AppFonts.semiBold),
+          style: const TextStyle(
+            fontSize: 13,
+            height: 15.0,
+          ).montserrat(fontWeight: AppFonts.semiBold),
         ),
       ),
     );

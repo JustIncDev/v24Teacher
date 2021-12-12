@@ -7,6 +7,8 @@ enum StringId {
   email,
   password,
   or,
+  noAccount,
+  register,
 }
 
 class ForIdValues {
@@ -20,6 +22,8 @@ class ForIdValues {
       StringId.email: 'Email',
       StringId.password: 'Password',
       StringId.or: 'or',
+      StringId.noAccount: 'No account yet?',
+      StringId.register: 'Register',
     }
   };
 
