@@ -9,6 +9,15 @@ enum StringId {
   or,
   noAccount,
   register,
+  registration,
+  firstName,
+  lastName,
+  phoneNumber,
+  continueText,
+  alreadyHaveMessage,
+  signIn,
+  confirmPassword,
+  finish,
 }
 
 class ForIdValues {
@@ -24,6 +33,15 @@ class ForIdValues {
       StringId.or: 'or',
       StringId.noAccount: 'No account yet?',
       StringId.register: 'Register',
+      StringId.registration: 'Registration',
+      StringId.firstName: 'First name',
+      StringId.lastName: 'Last name',
+      StringId.phoneNumber: 'Phone number',
+      StringId.continueText: 'Continue',
+      StringId.alreadyHaveMessage: 'Already have an account?',
+      StringId.signIn: 'Sign in',
+      StringId.confirmPassword: 'Confirm password',
+      StringId.finish: 'Finish',
     }
   };
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:v24_teacher_app/global/ui/text_field/decoration/text_field_decoration.dart';
 import 'package:v24_teacher_app/res/colors.dart';
 import 'package:v24_teacher_app/res/fonts.dart';
 
@@ -61,72 +62,72 @@ class AppTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      onTap: onTap,
-      onChanged: onChanged,
-      autofocus: autofocus,
-      autocorrect: false,
-      enableSuggestions: false,
-      keyboardType: keyboardType,
-      onSubmitted: (value) {
-        if (nextFocusNode != null) FocusScope.of(context).requestFocus(nextFocusNode);
-        if (onActionClicked != null) onActionClicked!.call(value);
-      },
-      style: const TextStyle(
-        color: AppColors.black,
-        fontSize: 13,
-      ).montserrat(fontWeight: AppFonts.regular),
-      controller: controller,
-      minLines: 1,
-      maxLines: maxLines,
-      maxLength: maxLength,
-      textInputAction: textInputAction,
-      focusNode: focusNode,
-      obscureText: obscureText,
-      cursorColor: AppColors.borderColor,
-      inputFormatters: inputFormatters,
-      textAlignVertical: TextAlignVertical.center,
-      textCapitalization: textCapitalization,
-      textAlign: textAlign,
-      readOnly: readOnly,
-      enableInteractiveSelection: enableInteractiveSelection,
-      decoration: InputDecoration(
-        counterText: '',
-        isDense: true,
-        contentPadding: const EdgeInsets.only(top: 14.5, bottom: 14.5, left: 20.0, right: 14.0),
-        filled: false,
-        alignLabelWithHint: true,
-        labelText: labelText,
-        labelStyle: const TextStyle(color: AppColors.royalBlue, fontSize: 13.0)
-            .montserrat(fontWeight: AppFonts.semiBold),
-        errorMaxLines: 1,
-        errorText: errorText,
-        // errorStyle: const TextStyle(fontSize: 0, height: 0),
-        hintText: hintText,
-        hintStyle: TextStyle(color: AppColors.black.withOpacity(0.4), fontSize: 13.0)
-            .montserrat(fontWeight: AppFonts.regular),
-        suffixIcon: suffixIcon,
-        prefixIcon: prefixIcon,
-        prefixText: prefixText,
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(borderRadius),
-          borderSide: const BorderSide(color: AppColors.borderColor),
-        ),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(borderRadius),
-          borderSide: const BorderSide(color: AppColors.disabledColor),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(borderRadius),
-          borderSide: const BorderSide(color: AppColors.borderColor),
-        ),
-        errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(borderRadius),
-          borderSide: const BorderSide(color: AppColors.accent50),
-        ),
-        focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(borderRadius),
-          borderSide: const BorderSide(color: AppColors.accent),
+    return TextFieldDecoration(
+      labelText: labelText,
+      child: TextField(
+        onTap: onTap,
+        onChanged: onChanged,
+        autofocus: autofocus,
+        autocorrect: false,
+        enableSuggestions: false,
+        keyboardType: keyboardType,
+        onSubmitted: (value) {
+          if (nextFocusNode != null) FocusScope.of(context).requestFocus(nextFocusNode);
+          if (onActionClicked != null) onActionClicked!.call(value);
+        },
+        style: const TextStyle(
+          color: AppColors.black,
+          fontSize: 13,
+        ).montserrat(fontWeight: AppFonts.regular),
+        controller: controller,
+        minLines: 1,
+        maxLines: maxLines,
+        maxLength: maxLength,
+        textInputAction: textInputAction,
+        focusNode: focusNode,
+        obscureText: obscureText,
+        cursorColor: AppColors.borderColor,
+        inputFormatters: inputFormatters,
+        textAlignVertical: TextAlignVertical.center,
+        textCapitalization: textCapitalization,
+        textAlign: textAlign,
+        readOnly: readOnly,
+        enableInteractiveSelection: enableInteractiveSelection,
+        decoration: InputDecoration(
+          counterText: '',
+          isDense: true,
+          contentPadding: const EdgeInsets.only(top: 14.5, bottom: 14.5, left: 20.0, right: 14.0),
+          filled: false,
+          alignLabelWithHint: true,
+          errorMaxLines: 1,
+          errorText: errorText,
+          // errorStyle: const TextStyle(fontSize: 0, height: 0),
+          hintText: hintText,
+          hintStyle: TextStyle(color: AppColors.black.withOpacity(0.4), fontSize: 13.0)
+              .montserrat(fontWeight: AppFonts.regular),
+          suffixIcon: suffixIcon,
+          prefixIcon: prefixIcon,
+          prefixText: prefixText,
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(borderRadius),
+            borderSide: const BorderSide(color: AppColors.borderColor),
+          ),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(borderRadius),
+            borderSide: const BorderSide(color: AppColors.disabledColor),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(borderRadius),
+            borderSide: const BorderSide(color: AppColors.borderColor),
+          ),
+          errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(borderRadius),
+            borderSide: const BorderSide(color: AppColors.accent50),
+          ),
+          focusedErrorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(borderRadius),
+            borderSide: const BorderSide(color: AppColors.accent),
+          ),
         ),
       ),
     );

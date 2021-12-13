@@ -33,7 +33,7 @@ class SocialButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(6.0),
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 13.0, horizontal: 40.0),
+            padding: const EdgeInsets.symmetric(horizontal: 40.0),
             child: _getSocialIcon(),
           ),
         ),

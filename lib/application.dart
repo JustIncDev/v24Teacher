@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:v24_teacher_app/feature/login/login_screen.dart';
+import 'package:v24_teacher_app/feature/signup/credentials/signup_credentials_screen.dart';
 import 'package:v24_teacher_app/feature/signup/sms_code/phone_confirmation_screen.dart';
 import 'package:v24_teacher_app/global/injector.dart';
 import 'package:v24_teacher_app/res/localization/app_localization.dart';
@@ -26,7 +27,7 @@ class _V24TeacherApplicationState extends State<V24TeacherApplication> {
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
       ],
-      home: LoginScreen(),
+      home: SignUpCredentialsScreen(),
       themeMode: ThemeMode.dark,
     );
   }
