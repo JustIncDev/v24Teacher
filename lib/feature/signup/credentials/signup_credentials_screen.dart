@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:v24_teacher_app/feature/login/login_screen.dart';
 import 'package:v24_teacher_app/global/ui/button/primary_button.dart';
 import 'package:v24_teacher_app/global/ui/button/social_button.dart';
 import 'package:v24_teacher_app/global/ui/space.dart';
@@ -14,6 +15,10 @@ class SignUpCredentialsScreen extends StatefulWidget {
 
   @override
   _SignUpCredentialsScreenState createState() => _SignUpCredentialsScreenState();
+
+  static Route route() {
+    return MaterialPageRoute<void>(builder: (_) => const SignUpCredentialsScreen());
+  }
 }
 
 class _SignUpCredentialsScreenState extends State<SignUpCredentialsScreen> {
@@ -178,7 +183,9 @@ class _SignUpCredentialsScreenState extends State<SignUpCredentialsScreen> {
                         ),
                         const VerticalSpace(10.0),
                         TextButton(
-                          onPressed: null,
+                          onPressed: () {
+                            Navigator.of(context).push<void>(LoginScreen.route());
+                          },
                           child: Text(
                             getStringById(context, StringId.signIn),
                             style: const TextStyle(

@@ -1,22 +1,53 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:v24_teacher_app/feature/signup/credentials/signup_credentials_screen.dart';
 import 'package:v24_teacher_app/global/ui/button/primary_button.dart';
 import 'package:v24_teacher_app/global/ui/button/social_button.dart';
 import 'package:v24_teacher_app/global/ui/space.dart';
 import 'package:v24_teacher_app/global/ui/text_field/app_text_field.dart';
+import 'package:v24_teacher_app/global/ui/text_field/input_field_type.dart';
 import 'package:v24_teacher_app/res/colors.dart';
 import 'package:v24_teacher_app/res/fonts.dart';
 import 'package:v24_teacher_app/res/icons.dart';
 import 'package:v24_teacher_app/res/localization/id_values.dart';
+
+import 'bloc/login_bloc.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
+
+  static Route route() {
+    return MaterialPageRoute<void>(builder: (_) => const LoginScreen());
+  }
 }
 
 class _LoginScreenState extends State<LoginScreen> {
   var _passwordVisible = false;
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _emailFocusNode = FocusNode();
+  final _passwordFocusNode = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    _emailController.addListener(() {
+      _addLoginFieldInputEvent(InputFieldType.email, _emailController.text);
+    });
+    _passwordController.addListener(() {
+      _addLoginFieldInputEvent(InputFieldType.password, _passwordController.text);
+    });
+
+    _emailFocusNode.addListener(() {
+      _addLoginFieldValidateEvent(InputFieldType.email, _emailFocusNode);
+    });
+    _passwordFocusNode.addListener(() {
+      _addLoginFieldValidateEvent(InputFieldType.password, _passwordFocusNode);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -134,7 +165,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         const VerticalSpace(10.0),
                         TextButton(
-                          onPressed: null,
+                          onPressed: () {
+                            Navigator.of(context).push<void>(SignUpCredentialsScreen.route());
+                          },
                           child: Text(
                             getStringById(context, StringId.register),
                             style: const TextStyle(
@@ -156,5 +189,21 @@ class _LoginScreenState extends State<LoginScreen> {
         },
       ),
     );
+  }
+
+  void _addLoginFieldInputEvent(InputFieldType field, String value) {
+    BlocProvider.of<LoginBloc>(context).add(LoginFieldInputEvent(field: field, value: value));
+  }
+
+  void _addLoginFieldValidateEvent(InputFieldType field, FocusNode focusNode) {
+    if (!focusNode.hasFocus) {
+      BlocProvider.of<LoginBloc>(context).add(LoginFieldValidateEvent(field: field));
+    }
+  }
+
+  void _updateController(LoginState state) {
+    if (_passwordController.text != state.passwordValue) {
+      _passwordController.text = state.passwordValue;
+    }
   }
 }
