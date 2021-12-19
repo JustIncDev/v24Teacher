@@ -21,6 +21,13 @@ class PhoneNumberTextField extends StatelessWidget {
     return TextFieldDecoration(
       labelText: labelText,
       child: IntlPhoneField(
+        style: const TextStyle(color: AppColors.black, fontSize: 13.0)
+            .montserrat(fontWeight: AppFonts.regular),
+        countryNameStyle: TextStyle(color: AppColors.black.withOpacity(0.4), fontSize: 13.0)
+            .montserrat(fontWeight: AppFonts.regular),
+        countryCodeStyle: const TextStyle(color: AppColors.black, fontSize: 13.0)
+            .montserrat(fontWeight: AppFonts.regular),
+        cursorColor: AppColors.borderColor,
         decoration: InputDecoration(
           counterText: '',
           isDense: true,
@@ -60,9 +67,8 @@ class PhoneNumberTextField extends StatelessWidget {
           color: AppColors.borderColor,
         ),
         dropdownDecoration: BoxDecoration(
-          border: Border.all(color: AppColors.borderColor),
-          borderRadius: BorderRadius.circular(borderRadius)
-        ),
+            border: Border.all(color: AppColors.borderColor),
+            borderRadius: BorderRadius.circular(borderRadius)),
         dropdownTextStyle: const TextStyle(color: AppColors.black, fontSize: 13.0)
             .montserrat(fontWeight: AppFonts.regular),
         onChanged: (phone) {

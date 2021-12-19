@@ -135,42 +135,7 @@ class _SignUpCredentialsScreenState extends State<SignUpCredentialsScreen> {
                           onPressed: () => VoidCallback,
                           // onPressed: state.isFillAllFields() ? () => BlocProvider.of<LoginBloc>(context).add(LoginPerformEvent()) : null,
                         ),
-                        const VerticalSpace(35.0),
-                        Row(
-                          children: [
-                            const Expanded(
-                              child: const Divider(
-                                color: AppColors.disabledColor,
-                                thickness: 1.0,
-                                endIndent: 20.0,
-                              ),
-                            ),
-                            Text(
-                              getStringById(context, StringId.or),
-                              style: const TextStyle(
-                                color: AppColors.black,
-                                fontSize: 13.0,
-                                letterSpacing: -0.3,
-                              ).montserrat(fontWeight: AppFonts.regular),
-                            ),
-                            const Expanded(
-                              child: const Divider(
-                                color: AppColors.disabledColor,
-                                thickness: 1.0,
-                                indent: 20.0,
-                              ),
-                            ),
-                          ],
-                        ),
-                        const VerticalSpace(28.0),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const SocialButton(type: SocialMediaType.apple),
-                            const SocialButton(type: SocialMediaType.facebook),
-                            const SocialButton(type: SocialMediaType.google),
-                          ],
-                        ),
+                        const Spacer(),
                         const VerticalSpace(28.0),
                         Center(
                           child: Text(

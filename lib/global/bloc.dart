@@ -6,3 +6,5 @@ abstract class BaseBlocEvent extends Equatable {
 }
 
 abstract class BaseBlocState extends Equatable {}
+
+enum BaseScreenStatus { input, lock, next, back }
