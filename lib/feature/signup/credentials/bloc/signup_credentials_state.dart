@@ -8,7 +8,7 @@ class SignUpCredentialsState extends BaseBlocState {
     this.lastNameError = const FieldError.none(),
     this.emailValue = '',
     this.emailError = const FieldError.none(),
-    // this.counryCodeValue = '',
+    this.countryNameValue = '',
     this.phoneValue = '',
     this.phoneError = const FieldError.none(),
     this.passwordValue = '',
@@ -26,6 +26,7 @@ class SignUpCredentialsState extends BaseBlocState {
   final FieldError lastNameError;
   final String emailValue;
   final FieldError emailError;
+  final String countryNameValue;
   final String phoneValue;
   final FieldError phoneError;
   final String passwordValue;
@@ -43,6 +44,7 @@ class SignUpCredentialsState extends BaseBlocState {
     FieldError? lastNameError,
     String? emailValue,
     FieldError? emailError,
+    String? countryNameValue,
     String? phoneValue,
     FieldError? phoneError,
     String? passwordValue,
@@ -56,6 +58,7 @@ class SignUpCredentialsState extends BaseBlocState {
     return SignUpCredentialsState(
       phoneValue: phoneValue ?? this.phoneValue,
       phoneError: phoneError ?? this.phoneError,
+      countryNameValue: countryNameValue ?? this.countryNameValue,
       emailValue: emailValue ?? this.emailValue,
       emailError: emailError ?? this.emailError,
       passwordValue: passwordValue ?? this.passwordValue,
@@ -93,6 +96,7 @@ class SignUpCredentialsState extends BaseBlocState {
         firstNameError,
         lastNameValue,
         lastNameError,
+        countryNameValue,
         phoneValue,
         phoneError,
         emailValue,
