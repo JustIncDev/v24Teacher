@@ -19,7 +19,9 @@ dependencies:
   flutter_bloc: ^8.0.0
   equatable: ^2.0.3
   sign_in_with_apple: ^3.3.0
-  intl_phone_number_input: ^0.7.0+2
+  intl_phone_field:
+    path: ./intl_phone_field
+  flutter_svg: ^1.0.0
 
 dev_dependencies:
   flutter_test:

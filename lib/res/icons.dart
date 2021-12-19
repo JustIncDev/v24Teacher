@@ -6,6 +6,10 @@ class AppIcons {
   static const facebookIcon = 'icons/facebookIcon.png';
   static const googleIcon = 'icons/googleIcon.png';
 
+  static const arrowDownIcon = 'icons/arrowDownIcon.svg';
+  static const arrowUpIcon = 'icons/arrowUpIcon.svg';
+
+
   static const eyeOpenAsset = AssetImage(eyeOpen);
   static const eyeCloseAsset = AssetImage(eyeClose);
   static const facebookIconAsset = AssetImage(facebookIcon);
