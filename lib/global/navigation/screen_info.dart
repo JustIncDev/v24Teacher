@@ -24,10 +24,12 @@ class ScreenInfo {
 }
 
 Page<void> toPage(ScreenInfo info, BuildContext context) {
-  switch(info.name) {
+  switch (info.name) {
     case ScreenName.login:
-      return LoginScreen.buildPage(info.params, Provider.of<BlocFactory>(context));
+      return LoginScreen.buildPage(
+          params: info.params, blocFactory: Provider.of<BlocFactory>(context));
     case ScreenName.signUpCredentials:
-      return SignUpCredentialsScreen.buildPage(params: info.params, blocFactory: Provider.of<BlocFactory>(context));
+      return SignUpCredentialsScreen.buildPage(
+          params: info.params, blocFactory: Provider.of<BlocFactory>(context));
   }
 }

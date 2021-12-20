@@ -11,6 +11,8 @@ import 'package:v24_teacher_app/global/ui/defocuser.dart';
 import 'package:v24_teacher_app/res/colors.dart';
 import 'package:v24_teacher_app/res/localization/app_localization.dart';
 
+import 'global/navigation/root_router.dart';
+
 class V24TeacherApplication extends StatefulWidget {
   const V24TeacherApplication({
     Key? key,

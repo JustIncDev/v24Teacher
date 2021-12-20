@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:v24_teacher_app/feature/login/login_screen.dart';
+import 'package:v24_teacher_app/global/bloc.dart';
+import 'package:v24_teacher_app/global/navigation/root_router.dart';
+import 'package:v24_teacher_app/global/navigation/screen_info.dart';
 import 'package:v24_teacher_app/global/ui/button/primary_button.dart';
 import 'package:v24_teacher_app/global/ui/button/social_button.dart';
 import 'package:v24_teacher_app/global/ui/space.dart';
@@ -10,6 +14,7 @@ import 'package:v24_teacher_app/res/colors.dart';
 import 'package:v24_teacher_app/res/fonts.dart';
 import 'package:v24_teacher_app/res/icons.dart';
 import 'package:v24_teacher_app/res/localization/id_values.dart';
+import 'package:v24_teacher_app/utils/ui.dart';
 
 class SignUpCredentialsScreen extends StatefulWidget {
   const SignUpCredentialsScreen({Key? key}) : super(key: key);
@@ -17,8 +22,17 @@ class SignUpCredentialsScreen extends StatefulWidget {
   @override
   _SignUpCredentialsScreenState createState() => _SignUpCredentialsScreenState();
 
-  static Route route() {
-    return MaterialPageRoute<void>(builder: (_) => const SignUpCredentialsScreen());
+  static Page buildPage({Map<String, Object>? params, required BlocFactory blocFactory}) {
+    return UiUtils.createPlatformPage(
+      key: const ValueKey('signup-credentials'),
+      child: BlocProvider(
+        create: (ctx) {
+          return blocFactory.createSignUpCredentialsBloc();
+        },
+        child: const SignUpCredentialsScreen(),
+        lazy: false,
+      ),
+    );
   }
 }
 
@@ -150,7 +164,7 @@ class _SignUpCredentialsScreenState extends State<SignUpCredentialsScreen> {
                         const VerticalSpace(10.0),
                         TextButton(
                           onPressed: () {
-                            Navigator.of(context).push<void>(LoginScreen.route());
+                            RootRouter.of(context)?.push(const ScreenInfo(name: ScreenName.login));
                           },
                           child: Text(
                             getStringById(context, StringId.signIn),
