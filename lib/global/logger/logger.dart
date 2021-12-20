@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:v24_teacher_app/global/logger/log_writer.dart';
+import 'package:v24_teacher_app/global/navigation/screen_info.dart';
 
 class Log {
   static final LogWriter _logWriter = FileLogWriter.instance;
@@ -144,6 +145,14 @@ class Log {
       if (tmpLogLength > 0) {
         print('${start == 0 ? '' : '-> '} ${log.substring(start, logLength)}');
       }
+    }
+  }
+
+  static String screenInfoToLog(ScreenInfo screenInfo) {
+    if (screenInfo.name == ScreenName.login) {
+      return '${screenInfo.name} [params: hidden]';
+    } else {
+      return '${screenInfo.name} [params: ${screenInfo.params.toString()}]';
     }
   }
 }

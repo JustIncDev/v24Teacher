@@ -8,9 +8,9 @@ import 'package:v24_teacher_app/global/ui/text_field/field_error.dart';
 part 'signup_credentials_event.dart';
 part 'signup_credentials_state.dart';
 
-class SignupCredentialsBloc extends Bloc<SignupCredentialsEvent, SignUpCredentialsState> {
-  SignupCredentialsBloc() : super(SignUpCredentialsState()) {
-    on<SignupCredentialsEvent>((event, emit) {
+class SignUpCredentialsBloc extends Bloc<SignUpCredentialsEvent, SignUpCredentialsState> {
+  SignUpCredentialsBloc() : super(SignUpCredentialsState()) {
+    on<SignUpCredentialsEvent>((event, emit) {
       // TODO: implement event handler
     });
   }
