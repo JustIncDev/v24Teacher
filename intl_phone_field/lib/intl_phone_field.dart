@@ -317,32 +317,6 @@ class _IntlPhoneFieldState extends State<IntlPhoneField> {
                     itemCount: filteredCountries.length,
                     itemBuilder: (ctx, index) => Column(
                       children: <Widget>[
-                        // ListTile(
-                        //   trailing: Image.asset(
-                        //     'assets/flags/${filteredCountries[index].code.toLowerCase()}.png',
-                        //     package: 'intl_phone_field',
-                        //     width: 13,
-                        //   ),
-                        //   title: Text(
-                        //     filteredCountries[index].name,
-                        //     style: widget.countryNameStyle,
-                        //   ),
-                        //   leading: Text(
-                        //     '+${filteredCountries[index].dialCode}',
-                        //     style: widget.countryCodeStyle,
-                        //   ),
-                        //   onTap: () {
-                        //     _selectedCountry = filteredCountries[index];
-                        //     widget.onCountryChanged?.call(
-                        //       PhoneNumber(
-                        //         countryISOCode: _selectedCountry.code,
-                        //         countryCode: '+${_selectedCountry.dialCode}',
-                        //         number: '',
-                        //       ),
-                        //     );
-                        //     Navigator.of(context).pop();
-                        //   },
-                        // ),
                         InkWell(
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -357,6 +331,7 @@ class _IntlPhoneFieldState extends State<IntlPhoneField> {
                                   Text(
                                     filteredCountries[index].name,
                                     style: widget.countryNameStyle,
+                                    overflow: TextOverflow.fade,
                                   ),
                                 ],
                               ),

@@ -18,6 +18,12 @@ enum StringId {
   signIn,
   confirmPassword,
   finish,
+  firstNameEmptyError,
+  lastNameEmptyError,
+  phoneEmptyError,
+  emailEmptyError,
+  passwordEmptyError,
+  passwordLengthError,
 }
 
 class ForIdValues {
@@ -42,6 +48,12 @@ class ForIdValues {
       StringId.signIn: 'Sign in',
       StringId.confirmPassword: 'Confirm password',
       StringId.finish: 'Finish',
+      StringId.firstNameEmptyError: 'First name is required',
+      StringId.lastNameEmptyError: 'Last name is required',
+      StringId.emailEmptyError: 'Email is required',
+      StringId.phoneEmptyError: 'Phone is required',
+      StringId.passwordEmptyError: 'Password is required',
+      StringId.passwordLengthError: 'Password should contain 8 to 35 characters',
     }
   };
 

@@ -28,13 +28,13 @@ class BlocFactory {
 
   LoginBloc createLoginBloc() {
     return LoginBloc(
-      authBloc: authBloc,
+      // authBloc: authBloc,
     );
   }
 
   SignUpCredentialsBloc createSignUpCredentialsBloc() {
     return SignUpCredentialsBloc(
-      signUpRepo: SignUpRepo(api: remoteApi),
+      // signUpRepo: SignUpRepo(api: remoteApi),
     );
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:v24_teacher_app/res/colors.dart';
 import 'package:v24_teacher_app/res/fonts.dart';
 import 'package:v24_teacher_app/res/localization/id_values.dart';
+import 'dart:math' as math;
 
 enum PrimaryButtonStyle {
   standard,
@@ -14,7 +15,7 @@ class PrimaryButton extends StatelessWidget {
     this.titleId,
     this.titleText,
     this.style = PrimaryButtonStyle.standard,
-    this.elevation = 0.0,
+    this.elevation = 10.0,
     this.child,
     this.disabledColor,
     this.backgroundColor,
@@ -58,7 +59,6 @@ class PrimaryButton extends StatelessWidget {
             side: borderSide ?? BorderSide.none,
           ),
         ),
-        // padding: MaterialStateProperty.all<EdgeInsetsGeometry>(EdgeInsets.zero),
         padding: MaterialStateProperty.resolveWith<EdgeInsetsGeometry>((states) {
           if (states.contains(MaterialState.disabled)) {
             return const EdgeInsets.symmetric(vertical: 16.5);

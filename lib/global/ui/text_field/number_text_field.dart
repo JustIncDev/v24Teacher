@@ -10,17 +10,25 @@ class PhoneNumberTextField extends StatelessWidget {
   const PhoneNumberTextField({
     Key? key,
     this.labelText,
+    this.errorText,
     this.borderRadius = 8.0,
+    this.controller,
+    this.focusNode,
   }) : super(key: key);
 
   final String? labelText;
+  final String? errorText;
   final double borderRadius;
+  final TextEditingController? controller;
+  final FocusNode? focusNode;
 
   @override
   Widget build(BuildContext context) {
     return TextFieldDecoration(
       labelText: labelText,
       child: IntlPhoneField(
+        controller: controller,
+        focusNode: focusNode,
         style: const TextStyle(color: AppColors.black, fontSize: 13.0)
             .montserrat(fontWeight: AppFonts.regular),
         countryNameStyle: TextStyle(color: AppColors.black.withOpacity(0.4), fontSize: 13.0)
@@ -29,6 +37,7 @@ class PhoneNumberTextField extends StatelessWidget {
             .montserrat(fontWeight: AppFonts.regular),
         cursorColor: AppColors.borderColor,
         decoration: InputDecoration(
+          errorText: errorText,
           counterText: '',
           isDense: true,
           contentPadding: const EdgeInsets.only(top: 14.5, bottom: 14.5, left: 20.0, right: 14.0),

@@ -1,1 +1,8 @@
-enum InputFieldType { phone, email, password, confirmPassword }
+enum InputFieldType {
+  firstName,
+  lastName,
+  phone,
+  email,
+  password,
+  confirmPassword,
+}
