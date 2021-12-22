@@ -1,11 +1,11 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:v24_teacher_app/application.dart';
 import 'package:v24_teacher_app/global/injector.dart';
-import 'package:v24_teacher_app/global/log_bloc_observer.dart';
 import 'package:v24_teacher_app/global/logger/logger.dart';
 
 void main() async {
@@ -17,6 +17,9 @@ void main() async {
 
 Future<void> _prepareApplicationStart() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   GestureBinding.instance?.resamplingEnabled = true;
 }
 
@@ -27,7 +30,6 @@ void _startApplication() {
 
   runZonedGuarded(
     () {
-      BlocOverrides.runZoned(() => null, blocObserver: LogBlocObserver());
       (Zone.current[#injector] as Injector).init().then((injector) {
         runApp(V24TeacherApplication(injector: injector));
       });

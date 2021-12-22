@@ -115,6 +115,10 @@ class _SignUpCredentialsScreenState extends State<SignUpCredentialsScreen> {
     var _confirmPasswordVisible = false;
 
     return BlocConsumer<SignUpCredentialsBloc, SignUpCredentialsState>(
+      listenWhen: (previous, current) {
+        return (previous.needFocusField != current.needFocusField) ||
+            (previous.status != current.status && current.status == BaseScreenStatus.next);
+      },
       listener: (context, state) {
         if (state.status == BaseScreenStatus.next) {
           // RootRouter.of(context)
@@ -275,7 +279,10 @@ class _SignUpCredentialsScreenState extends State<SignUpCredentialsScreen> {
                                 const VerticalSpace(28.0),
                                 PrimaryButton(
                                   titleId: StringId.finish,
-                                  onPressed: state.isFillAllFields() ? () => BlocProvider.of<SignUpCredentialsBloc>(context).add(SignUpPerformEvent()) : null,
+                                  onPressed: state.isFillAllFields()
+                                      ? () => BlocProvider.of<SignUpCredentialsBloc>(context)
+                                          .add(SignUpPerformEvent())
+                                      : null,
                                 ),
                                 const Spacer(),
                                 const VerticalSpace(28.0),

@@ -8,7 +8,7 @@ class SignUpCredentialsState extends BaseBlocState {
     this.lastNameError = const FieldError.none(),
     this.emailValue = '',
     this.emailError = const FieldError.none(),
-    this.countryNameValue = '',
+    this.countryNameValue = 'Russia',
     this.phoneValue = '',
     this.phoneError = const FieldError.none(),
     this.passwordValue = '',
@@ -16,7 +16,6 @@ class SignUpCredentialsState extends BaseBlocState {
     this.confirmValue = '',
     this.confirmError = const FieldError.none(),
     this.needFocusField = '',
-    this.agreeTerms = false,
     this.status = BaseScreenStatus.input,
   });
 
@@ -34,7 +33,6 @@ class SignUpCredentialsState extends BaseBlocState {
   final String confirmValue;
   final FieldError confirmError;
   final String needFocusField;
-  final bool agreeTerms;
   final BaseScreenStatus status;
 
   SignUpCredentialsState copyWith({
@@ -56,6 +54,10 @@ class SignUpCredentialsState extends BaseBlocState {
     bool? agreeTerms,
   }) {
     return SignUpCredentialsState(
+      firstNameValue: firstNameValue ?? this.firstNameValue,
+      firstNameError: firstNameError ?? this.firstNameError,
+      lastNameValue: lastNameValue ?? this.lastNameValue,
+      lastNameError: lastNameError ?? this.lastNameError,
       phoneValue: phoneValue ?? this.phoneValue,
       phoneError: phoneError ?? this.phoneError,
       countryNameValue: countryNameValue ?? this.countryNameValue,
@@ -66,7 +68,6 @@ class SignUpCredentialsState extends BaseBlocState {
       confirmValue: confirmValue ?? this.confirmValue,
       confirmError: confirmError ?? this.confirmError,
       needFocusField: needFocusField ?? this.needFocusField,
-      agreeTerms: agreeTerms ?? this.agreeTerms,
       status: status ?? this.status,
     );
   }
@@ -77,8 +78,7 @@ class SignUpCredentialsState extends BaseBlocState {
         phoneValue.trim().isNotEmpty &&
         emailValue.trim().isNotEmpty &&
         passwordValue.trim().isNotEmpty &&
-        confirmValue.trim().isNotEmpty &&
-        agreeTerms;
+        confirmValue.trim().isNotEmpty;
   }
 
   bool isFieldError() {
@@ -96,7 +96,6 @@ class SignUpCredentialsState extends BaseBlocState {
         firstNameError,
         lastNameValue,
         lastNameError,
-        countryNameValue,
         phoneValue,
         phoneError,
         emailValue,
@@ -106,7 +105,6 @@ class SignUpCredentialsState extends BaseBlocState {
         confirmValue,
         confirmError,
         needFocusField,
-        agreeTerms,
         status,
       ];
 }

@@ -12,13 +12,17 @@ part 'signup_credentials_state.dart';
 class SignUpCredentialsBloc extends Bloc<SignUpCredentialsEvent, SignUpCredentialsState> {
   SignUpCredentialsBloc() : super(SignUpCredentialsState()) {
     on<SignUpCredentialsEvent>((event, emit) {
-      on<SignUpFieldInputEvent>(_mapFieldInputEvent);
-      on<SignUpFieldValidateEvent>(_mapFieldValidateEvent);
-      on<SignUpPerformEvent>(_mapPerformEvent);
+      if (event is SignUpFieldInputEvent) {
+        _handleFieldInputEvent(event, emit);
+      } else if (event is SignUpFieldValidateEvent) {
+        _handleFieldValidateEvent(event, emit);
+      } else if (event is SignUpPerformEvent) {
+        _handlePerformEvent(event, emit);
+      }
     });
   }
 
-  void _mapFieldInputEvent(
+  void _handleFieldInputEvent(
     SignUpFieldInputEvent event,
     Emitter<SignUpCredentialsState> emit,
   ) {
@@ -74,7 +78,7 @@ class SignUpCredentialsBloc extends Bloc<SignUpCredentialsEvent, SignUpCredentia
     }
   }
 
-  void _mapFieldValidateEvent(
+  void _handleFieldValidateEvent(
     SignUpFieldValidateEvent event,
     Emitter<SignUpCredentialsState> emit,
   ) {
@@ -110,7 +114,7 @@ class SignUpCredentialsBloc extends Bloc<SignUpCredentialsEvent, SignUpCredentia
     }
   }
 
-  void _mapPerformEvent(
+  void _handlePerformEvent(
     SignUpPerformEvent event,
     Emitter<SignUpCredentialsState> emit,
   ) {
