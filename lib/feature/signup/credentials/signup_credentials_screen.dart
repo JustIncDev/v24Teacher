@@ -280,8 +280,7 @@ class _SignUpCredentialsScreenState extends State<SignUpCredentialsScreen> {
                                 PrimaryButton(
                                   titleId: StringId.finish,
                                   onPressed: state.isFillAllFields()
-                                      ? () => BlocProvider.of<SignUpCredentialsBloc>(context)
-                                          .add(SignUpPerformEvent())
+                                      ? () => _onFinishButtonTap(state)
                                       : null,
                                 ),
                                 const Spacer(),
@@ -328,6 +327,12 @@ class _SignUpCredentialsScreenState extends State<SignUpCredentialsScreen> {
         );
       },
     );
+  }
+
+  void _onFinishButtonTap(SignUpCredentialsState state) {
+    BlocProvider.of<SignUpCredentialsBloc>(context).add(SignUpPerformEvent());
+    RootRouter.of(context)
+        ?.push(ScreenInfo(name: ScreenName.signUpCode, params: {'phone': state.phoneValue}));
   }
 
   void _changeFieldCursorPosition(FocusNode focusNode, InputFieldType field) {

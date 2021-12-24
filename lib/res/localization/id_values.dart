@@ -24,6 +24,8 @@ enum StringId {
   emailEmptyError,
   passwordEmptyError,
   passwordLengthError,
+  phoneConfirmation,
+  enterCodeMessage,
 }
 
 class ForIdValues {
@@ -54,6 +56,9 @@ class ForIdValues {
       StringId.phoneEmptyError: 'Phone is required',
       StringId.passwordEmptyError: 'Password is required',
       StringId.passwordLengthError: 'Password should contain 8 to 35 characters',
+      StringId.phoneConfirmation: 'Phone confirmation',
+      StringId.enterCodeMessage: 'Please enter the verification code that was sent to ',
+
     }
   };
 
@@ -64,4 +69,12 @@ class ForIdValues {
 
 String getStringById(BuildContext context, StringId id) {
   return TextResource.of(context)?.forIdValues.getValue(id) ?? '';
+}
+
+String getStringWithValues(BuildContext context, StringId stringId, List<String> args) {
+  var res = getStringById(context, stringId);
+  for (var i = 0; i < args.length; i++) {
+    res = res.replaceAll('<${i + 1}>', args[i]);
+  }
+  return res;
 }

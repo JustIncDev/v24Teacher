@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:v24_teacher_app/feature/login/bloc/login_bloc.dart';
 import 'package:v24_teacher_app/feature/signup/credentials/bloc/signup_credentials_bloc.dart';
+import 'package:v24_teacher_app/feature/signup/sms_code/bloc/signup_code_bloc.dart';
 import 'package:v24_teacher_app/global/data_blocs/auth/auth_bloc.dart';
 
 abstract class BaseBlocEvent extends Equatable {
@@ -28,13 +29,17 @@ class BlocFactory {
 
   LoginBloc createLoginBloc() {
     return LoginBloc(
-      // authBloc: authBloc,
-    );
+        // authBloc: authBloc,
+        );
   }
 
   SignUpCredentialsBloc createSignUpCredentialsBloc() {
     return SignUpCredentialsBloc(
-      // signUpRepo: SignUpRepo(api: remoteApi),
-    );
+        // signUpRepo: SignUpRepo(api: remoteApi),
+        );
+  }
+
+  SignUpCodeBloc createSignUpCodeBloc() {
+    return SignUpCodeBloc();
   }
 }
