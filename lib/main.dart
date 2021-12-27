@@ -25,7 +25,7 @@ Future<void> _prepareApplicationStart() async {
 
 void _startApplication() {
   Log.info('---------------------------------------------------------------------------');
-  Log.info('START V24Student');
+  Log.info('START V24Teacher');
   Log.info('---------------------------------------------------------------------------');
 
   runZonedGuarded(

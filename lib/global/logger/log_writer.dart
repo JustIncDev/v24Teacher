@@ -87,6 +87,6 @@ class FileLogWriter implements LogWriter {
   }
 
   static String get _fileName {
-    return 'V24Student_${DateUtils.formatToFileDate(DateTime.now())}';
+    return 'V24Teacher_${DateUtils.formatToFileDate(DateTime.now())}';
   }
 }
