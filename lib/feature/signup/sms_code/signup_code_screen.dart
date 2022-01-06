@@ -39,108 +39,244 @@ class SignUpCodeScreen extends StatefulWidget {
 }
 
 class _SignUpCodeScreenState extends State<SignUpCodeScreen> {
+  final firstDigitFocusNode = FocusNode();
+  final secondDigitFocusNode = FocusNode();
+  final thirdDigitFocusNode = FocusNode();
+  final fourthDigitFocusNode = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    firstDigitFocusNode.requestFocus();
+  }
+
+  @override
+  void dispose() {
+    firstDigitFocusNode.dispose();
+    secondDigitFocusNode.dispose();
+    thirdDigitFocusNode.dispose();
+    fourthDigitFocusNode.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<SignUpCodeBloc, SignUpCodeState>(listener: (context, state) {
-      // TODO: implement listener
-    }, builder: (context, state) {
-      return Scaffold(
-        body: DecoratedBox(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.bottomLeft,
-              end: Alignment.topRight,
-              stops: [0.35, 0.55, 0.88],
-              colors: [
-                AppColors.blueRaspberry,
-                AppColors.hooloovooBlue,
-                AppColors.sixteenMillionPink,
-              ],
+    return BlocConsumer<SignUpCodeBloc, SignUpCodeState>(
+      listenWhen: (previous, current) {
+        return (previous.currentCodePosition != current.currentCodePosition);
+      },
+      listener: (context, state) {
+        if (state.currentCodePosition == 0) {
+          firstDigitFocusNode.requestFocus();
+        } else if (state.currentCodePosition == 1) {
+          secondDigitFocusNode.requestFocus();
+        } else if (state.currentCodePosition == 2) {
+          thirdDigitFocusNode.requestFocus();
+        } else {
+          fourthDigitFocusNode.requestFocus();
+        }
+      },
+      builder: (context, state) {
+        return Scaffold(
+          body: DecoratedBox(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.bottomLeft,
+                end: Alignment.topRight,
+                stops: [0.35, 0.55, 0.88],
+                colors: [
+                  AppColors.blueRaspberry,
+                  AppColors.hooloovooBlue,
+                  AppColors.sixteenMillionPink,
+                ],
+              ),
             ),
-          ),
-          child: Column(
-            children: [
-              Container(
-                height: MediaQuery.of(context).size.height * 0.55,
-                width: MediaQuery.of(context).size.width,
-                child: CustomPaint(
-                  painter: BackgroundPainter(),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                    child: Column(
-                      children: [
-                        const VerticalSpace(93.0),
-                        SvgPicture.asset(AppIcons.phoneSmsIcon),
-                        const VerticalSpace(28.0),
-                        Text(
-                          getStringById(context, StringId.phoneConfirmation),
-                          style: const TextStyle(fontSize: 18.0, color: AppColors.white)
-                              .montserrat(fontWeight: AppFonts.semiBold),
-                        ),
-                        const VerticalSpace(10.0),
-                        RichText(
-                          textAlign: TextAlign.center,
-                          text: TextSpan(children: [
-                            TextSpan(
-                                text: getStringById(context, StringId.enterCodeMessage),
-                                style: const TextStyle(fontSize: 14.0, color: AppColors.white)
-                                    .montserrat(fontWeight: AppFonts.regular)),
-                            TextSpan(
-                                text: widget.phone,
-                                style: const TextStyle(fontSize: 14.0, color: AppColors.white)
-                                    .montserrat(fontWeight: AppFonts.semiBold)),
-                          ]),
-                        ),
-                        const VerticalSpace(60.0),
-                        Row(
+            child: Column(
+              children: [
+                Container(
+                  height: MediaQuery.of(context).size.height * 0.55,
+                  width: MediaQuery.of(context).size.width,
+                  child: CustomPaint(
+                    painter: BackgroundPainter(),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                      child: Column(
+                        children: [
+                          const VerticalSpace(93.0),
+                          SvgPicture.asset(AppIcons.phoneSmsIcon),
+                          const VerticalSpace(28.0),
+                          Text(
+                            getStringById(context, StringId.phoneConfirmation),
+                            style: const TextStyle(fontSize: 18.0, color: AppColors.white)
+                                .montserrat(fontWeight: AppFonts.semiBold),
+                          ),
+                          const VerticalSpace(10.0),
+                          RichText(
+                            textAlign: TextAlign.center,
+                            text: TextSpan(children: [
+                              TextSpan(
+                                  text: getStringById(context, StringId.enterCodeMessage),
+                                  style: const TextStyle(fontSize: 14.0, color: AppColors.white)
+                                      .montserrat(fontWeight: AppFonts.regular)),
+                              TextSpan(
+                                  text: widget.phone,
+                                  style: const TextStyle(fontSize: 14.0, color: AppColors.white)
+                                      .montserrat(fontWeight: AppFonts.semiBold)),
+                            ]),
+                          ),
+                          const VerticalSpace(60.0),
+                          Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: List.generate(4, (index) => _CodeFieldWidget())),
-                        const VerticalSpace(40.0),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const Expanded(
-                                child: TextButton(onPressed: null, child: Text('Change phone'))),
-                            const Expanded(
-                                child: TextButton(onPressed: null, child: Text('Resend code'))),
-                          ],
-                        )
-                      ],
+                            children: [
+                              _CodeFieldWidget(
+                                value: state.firstCodeValue,
+                                focusNode: firstDigitFocusNode,
+                                showCursor: state.showCursor(0),
+                              ),
+                              _CodeFieldWidget(
+                                value: state.secondCodeValue,
+                                focusNode: secondDigitFocusNode,
+                                showCursor: state.showCursor(1),
+                              ),
+                              _CodeFieldWidget(
+                                value: state.thirdCodeValue,
+                                focusNode: thirdDigitFocusNode,
+                                showCursor: state.showCursor(2),
+                              ),
+                              _CodeFieldWidget(
+                                value: state.fourthCodeValue,
+                                focusNode: fourthDigitFocusNode,
+                                showCursor: state.showCursor(3),
+                              ),
+                            ],
+                          ),
+                          const VerticalSpace(40.0),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              TextButton(
+                                onPressed: null,
+                                style: ButtonStyle(
+                                  padding: MaterialStateProperty.resolveWith<EdgeInsetsGeometry>(
+                                      (states) {
+                                    return EdgeInsets.zero;
+                                  }),
+                                ),
+                                child: Row(
+                                  children: [
+                                    SvgPicture.asset(AppIcons.arrowLeftIcon),
+                                    const HorizontalSpace(11.0),
+                                    Text(
+                                      getStringById(context, StringId.changePhone),
+                                      style: const TextStyle(fontSize: 14.0, color: AppColors.white)
+                                          .montserrat(fontWeight: AppFonts.semiBold),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              TextButton(
+                                onPressed: null,
+                                style: ButtonStyle(
+                                  padding: MaterialStateProperty.resolveWith<EdgeInsetsGeometry>(
+                                          (states) {
+                                        return EdgeInsets.zero;
+                                      }),
+                                ),
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      getStringById(context, StringId.resendCode),
+                                      style: const TextStyle(fontSize: 14.0, color: AppColors.white)
+                                          .montserrat(fontWeight: AppFonts.semiBold),
+                                    ),
+                                    //Make timer for resend code
+                                    Text(
+                                      ' 1:31',
+                                      style: const TextStyle(fontSize: 14.0, color: AppColors.white)
+                                          .montserrat(fontWeight: AppFonts.semiBold),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-              DigitPanelWidget(
-                onPanelTap: ({clear, unlock, value}) {
-                  if (value != null) {}
-                },
-              ),
-            ],
+                DigitPanelWidget(
+                  onPanelTap: ({clear, unlock, value}) {
+                    if (value != null) {
+                      BlocProvider.of<SignUpCodeBloc>(context).add(SignUpCodeInputEvent(value));
+                    }
+                    if (clear != null) {
+                      BlocProvider.of<SignUpCodeBloc>(context).add(SignUpCodeClearEvent());
+                    }
+                  },
+                ),
+              ],
+            ),
           ),
-        ),
-      );
-    });
+        );
+      },
+    );
   }
 }
 
-class _CodeFieldWidget extends StatelessWidget {
+class _CodeFieldWidget extends StatefulWidget {
   const _CodeFieldWidget({
     Key? key,
     this.focusNode,
-    this.digit,
+    this.value,
     this.showCursor = false,
   }) : super(key: key);
 
   final FocusNode? focusNode;
-  final int? digit;
+  final String? value;
 
   /// Cursor for the empty value
   final bool showCursor;
 
   @override
+  State<_CodeFieldWidget> createState() => _CodeFieldWidgetState();
+}
+
+class _CodeFieldWidgetState extends State<_CodeFieldWidget> with SingleTickerProviderStateMixin {
+  late AnimationController _animationController;
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 500),
+    );
+    _animationController.repeat(reverse: true);
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    Widget fieldValue = widget.showCursor
+        ? Text(
+            '|',
+            style: const TextStyle(fontSize: 24.0, color: AppColors.white)
+                .montserrat(fontWeight: AppFonts.light),
+          )
+        : Text(
+            widget.value ?? '',
+            style: const TextStyle(fontSize: 24.0, color: AppColors.white)
+                .montserrat(fontWeight: AppFonts.semiBold),
+          );
+
     return Focus(
-      focusNode: focusNode,
+      focusNode: widget.focusNode,
       child: Container(
         width: 60.0,
         height: 60.0,
@@ -150,11 +286,12 @@ class _CodeFieldWidget extends StatelessWidget {
           color: AppColors.white.withOpacity(0.1),
         ),
         child: Center(
-          child: Text(
-            '${digit ?? ''}',
-            style: const TextStyle(fontSize: 24.0, color: AppColors.white)
-                .montserrat(fontWeight: AppFonts.semiBold),
-          ),
+          child: widget.showCursor
+              ? FadeTransition(
+                  opacity: _animationController,
+                  child: fieldValue,
+                )
+              : fieldValue,
         ),
       ),
     );
