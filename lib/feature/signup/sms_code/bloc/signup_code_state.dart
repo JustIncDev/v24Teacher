@@ -2,12 +2,11 @@ part of 'signup_code_bloc.dart';
 
 class SignUpCodeState extends BaseBlocState {
   SignUpCodeState({
-    this.currentCodePosition = -1,
+    this.currentCodePosition = 0,
     this.firstCodeValue = '',
     this.secondCodeValue = '',
     this.thirdCodeValue = '',
     this.fourthCodeValue = '',
-    this.finalCode = '',
   });
 
   final int currentCodePosition;
@@ -15,7 +14,6 @@ class SignUpCodeState extends BaseBlocState {
   final String secondCodeValue;
   final String thirdCodeValue;
   final String fourthCodeValue;
-  final String? finalCode;
 
   SignUpCodeState copyWith({
     int? currentCodePosition,
@@ -31,6 +29,20 @@ class SignUpCodeState extends BaseBlocState {
       thirdCodeValue: thirdCodeValue ?? this.thirdCodeValue,
       fourthCodeValue: fourthCodeValue ?? this.fourthCodeValue,
     );
+  }
+
+  bool showCursor(int index) {
+    var value = '';
+    if (index == 0) {
+      value = firstCodeValue;
+    } else if (index == 1) {
+      value = secondCodeValue;
+    } else if (index == 2) {
+      value = thirdCodeValue;
+    } else {
+      value = fourthCodeValue;
+    }
+    return index == currentCodePosition && value.isEmpty;
   }
 
   @override

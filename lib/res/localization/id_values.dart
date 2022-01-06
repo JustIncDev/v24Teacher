@@ -26,6 +26,8 @@ enum StringId {
   passwordLengthError,
   phoneConfirmation,
   enterCodeMessage,
+  changePhone,
+  resendCode,
 }
 
 class ForIdValues {
@@ -58,7 +60,8 @@ class ForIdValues {
       StringId.passwordLengthError: 'Password should contain 8 to 35 characters',
       StringId.phoneConfirmation: 'Phone confirmation',
       StringId.enterCodeMessage: 'Please enter the verification code that was sent to ',
-
+      StringId.changePhone: 'Change phone',
+      StringId.resendCode: 'Resend code',
     }
   };
 

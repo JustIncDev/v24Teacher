@@ -8,6 +8,7 @@ class AppIcons {
 
   static const arrowDownIcon = 'icons/arrowDownIcon.svg';
   static const arrowUpIcon = 'icons/arrowUpIcon.svg';
+  static const arrowLeftIcon = 'icons/arrowLeftIcon.svg';
   static const phoneSmsIcon = 'icons/phoneSmsIcon.svg';
   static const clearIcon = 'icons/clearIcon.svg';
   static const faceIdIcon = 'icons/faceIdIcon.svg';
