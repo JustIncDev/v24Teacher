@@ -28,6 +28,7 @@ enum StringId {
   enterCodeMessage,
   changePhone,
   resendCode,
+  passwordNotEqualityError,
 }
 
 class ForIdValues {
@@ -62,6 +63,7 @@ class ForIdValues {
       StringId.enterCodeMessage: 'Please enter the verification code that was sent to ',
       StringId.changePhone: 'Change phone',
       StringId.resendCode: 'Resend code',
+      StringId.passwordNotEqualityError: 'The confirmation password doesn\'t match',
     }
   };
 

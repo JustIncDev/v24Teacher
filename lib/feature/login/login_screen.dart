@@ -63,6 +63,16 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+
+    _emailFocusNode.dispose();
+    _passwordFocusNode.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocConsumer<LoginBloc, LoginState>(
       listenWhen: (previous, current) {
@@ -85,6 +95,7 @@ class _LoginScreenState extends State<LoginScreen> {
         }
       },
       builder: (context, state) {
+        _updateController(state);
         return Stack(
           children: [
             Scaffold(
@@ -119,13 +130,19 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                                 const VerticalSpace(55.5),
                                 AppTextField(
+                                  controller: _emailController,
+                                  focusNode: _emailFocusNode,
                                   labelText: getStringById(context, StringId.email),
                                   hintText: 'example@gmail.com',
                                   keyboardType: TextInputType.emailAddress,
+                                  errorText: state.emailError.getMessage(context),
                                 ),
                                 const VerticalSpace(18.0),
                                 AppTextField(
+                                  controller: _passwordController,
+                                  focusNode: _passwordFocusNode,
                                   labelText: getStringById(context, StringId.password),
+                                  errorText: state.passwordError.getMessage(context),
                                   obscureText: !_passwordVisible,
                                   keyboardType: TextInputType.visiblePassword,
                                   suffixIcon: IconButton(

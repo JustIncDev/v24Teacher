@@ -1,6 +1,5 @@
-import 'dart:async';
-
 import 'package:bloc/bloc.dart';
+import 'package:uuid/uuid.dart';
 import 'package:v24_teacher_app/global/bloc.dart';
 import 'package:v24_teacher_app/global/ui/text_field/field_error.dart';
 import 'package:v24_teacher_app/global/ui/text_field/input_field_type.dart';
@@ -18,6 +17,8 @@ class SignUpCredentialsBloc extends Bloc<SignUpCredentialsEvent, SignUpCredentia
         _handleFieldValidateEvent(event, emit);
       } else if (event is SignUpPerformEvent) {
         _handlePerformEvent(event, emit);
+      } else if (event is SignUpSuccessEvent) {
+        _handleSuccessEvent(event, emit);
       }
     });
   }
@@ -124,6 +125,22 @@ class SignUpCredentialsBloc extends Bloc<SignUpCredentialsEvent, SignUpCredentia
         state.phoneValue +
         state.passwordValue +
         state.confirmValue);
+    var newState = validationFields(state);
+    if (newState.isFieldError()) {
+      emit(newState);
+    } else {
+      emit(state.copyWith(status: BaseScreenStatus.lock));
+      add(SignUpSuccessEvent(verificationToken: 'verificationToken'));
+
+      ///Add sign up logic
+    }
+  }
+
+  void _handleSuccessEvent(
+    SignUpSuccessEvent event,
+    Emitter<SignUpCredentialsState> emit,
+  ) {
+    emit(state.copyWith(status: BaseScreenStatus.next));
   }
 
   FieldError validateName(String userNameValue, InputFieldType type) {
@@ -158,5 +175,29 @@ class SignUpCredentialsBloc extends Bloc<SignUpCredentialsEvent, SignUpCredentia
       return const FieldError(stringId: StringId.passwordLengthError);
     }
     return const FieldError.none();
+  }
+
+  SignUpCredentialsState validationFields(SignUpCredentialsState currentState) {
+    var firstNameError = validateName(currentState.firstNameValue, InputFieldType.firstName);
+    var lastNameError = validateName(currentState.lastNameValue, InputFieldType.lastName);
+    var phoneError = validatePhone(currentState.phoneValue);
+    var emailError = validateEmail(currentState.emailValue);
+    var passwordError = validatePassword(currentState.passwordValue);
+    var confirmError = validatePassword(currentState.confirmValue);
+    if (passwordError.isNone() &&
+        confirmError.isNone() &&
+        currentState.passwordValue != currentState.confirmValue) {
+      confirmError = const FieldError(stringId: StringId.passwordNotEqualityError);
+    }
+    return currentState.copyWith(
+      firstNameError: firstNameError,
+      lastNameError: lastNameError,
+      phoneError: phoneError,
+      emailError: emailError,
+      passwordError: passwordError,
+      confirmError: confirmError,
+      needFocusField: const Uuid().v4(),
+      status: BaseScreenStatus.input,
+    );
   }
 }

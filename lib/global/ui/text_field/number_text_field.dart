@@ -26,6 +26,7 @@ class PhoneNumberTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFieldDecoration(
       labelText: labelText,
+      errorText: errorText,
       child: IntlPhoneField(
         controller: controller,
         focusNode: focusNode,
@@ -37,13 +38,11 @@ class PhoneNumberTextField extends StatelessWidget {
             .montserrat(fontWeight: AppFonts.regular),
         cursorColor: AppColors.borderColor,
         decoration: InputDecoration(
-          errorText: errorText,
           counterText: '',
           isDense: true,
           contentPadding: const EdgeInsets.only(top: 14.5, bottom: 14.5, left: 20.0, right: 14.0),
           filled: false,
           alignLabelWithHint: true,
-          errorMaxLines: 1,
           hintText: '000-000-000',
           hintStyle: TextStyle(color: AppColors.black.withOpacity(0.4), fontSize: 13.0)
               .montserrat(fontWeight: AppFonts.regular),
