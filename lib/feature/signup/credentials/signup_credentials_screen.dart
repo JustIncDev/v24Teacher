@@ -38,73 +38,73 @@ class SignUpCredentialsScreen extends StatefulWidget {
 }
 
 class _SignUpCredentialsScreenState extends State<SignUpCredentialsScreen> {
-  final firstNameFocusNode = FocusNode();
-  final lastNameFocusNode = FocusNode();
-  final emailFocusNode = FocusNode();
-  final phoneFocusNode = FocusNode();
-  final passwordFocusNode = FocusNode();
-  final confirmPasswordFocusNode = FocusNode();
+  final _firstNameFocusNode = FocusNode();
+  final _lastNameFocusNode = FocusNode();
+  final _emailFocusNode = FocusNode();
+  final _phoneFocusNode = FocusNode();
+  final _passwordFocusNode = FocusNode();
+  final _confirmPasswordFocusNode = FocusNode();
 
-  final firstNameController = TextEditingController();
-  final lastNameController = TextEditingController();
-  final emailController = TextEditingController();
-  final phoneController = TextEditingController();
-  final passwordController = TextEditingController();
+  final _firstNameController = TextEditingController();
+  final _lastNameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _phoneController = TextEditingController();
+  final _passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
 
-    firstNameController
-        .addListener(() => _listenInputField(InputFieldType.firstName, firstNameController.text));
+    _firstNameController
+        .addListener(() => _listenInputField(InputFieldType.firstName, _firstNameController.text));
 
-    lastNameController
-        .addListener(() => _listenInputField(InputFieldType.lastName, lastNameController.text));
+    _lastNameController
+        .addListener(() => _listenInputField(InputFieldType.lastName, _lastNameController.text));
 
-    phoneController
-        .addListener(() => _listenInputField(InputFieldType.phone, phoneController.text));
+    _phoneController
+        .addListener(() => _listenInputField(InputFieldType.phone, _phoneController.text));
 
-    emailController
-        .addListener(() => _listenInputField(InputFieldType.email, emailController.text));
+    _emailController
+        .addListener(() => _listenInputField(InputFieldType.email, _emailController.text));
 
-    passwordController
-        .addListener(() => _listenInputField(InputFieldType.password, passwordController.text));
+    _passwordController
+        .addListener(() => _listenInputField(InputFieldType.password, _passwordController.text));
 
     confirmPasswordController.addListener(
         () => _listenInputField(InputFieldType.confirmPassword, confirmPasswordController.text));
 
-    firstNameFocusNode.addListener(
-        () => _changeFieldCursorPosition(firstNameFocusNode, InputFieldType.firstName));
+    _firstNameFocusNode.addListener(
+        () => _changeFieldCursorPosition(_firstNameFocusNode, InputFieldType.firstName));
 
-    lastNameFocusNode
-        .addListener(() => _changeFieldCursorPosition(lastNameFocusNode, InputFieldType.lastName));
+    _lastNameFocusNode
+        .addListener(() => _changeFieldCursorPosition(_lastNameFocusNode, InputFieldType.lastName));
 
-    phoneFocusNode
-        .addListener(() => _changeFieldCursorPosition(phoneFocusNode, InputFieldType.phone));
+    _phoneFocusNode
+        .addListener(() => _changeFieldCursorPosition(_phoneFocusNode, InputFieldType.phone));
 
-    emailFocusNode
-        .addListener(() => _changeFieldCursorPosition(emailFocusNode, InputFieldType.email));
+    _emailFocusNode
+        .addListener(() => _changeFieldCursorPosition(_emailFocusNode, InputFieldType.email));
 
-    passwordFocusNode
-        .addListener(() => _changeFieldCursorPosition(passwordFocusNode, InputFieldType.password));
+    _passwordFocusNode
+        .addListener(() => _changeFieldCursorPosition(_passwordFocusNode, InputFieldType.password));
 
-    confirmPasswordFocusNode.addListener(
-        () => _changeFieldCursorPosition(confirmPasswordFocusNode, InputFieldType.confirmPassword));
+    _confirmPasswordFocusNode.addListener(() =>
+        _changeFieldCursorPosition(_confirmPasswordFocusNode, InputFieldType.confirmPassword));
   }
 
   @override
   void dispose() {
-    firstNameFocusNode.dispose();
-    lastNameFocusNode.dispose();
-    emailFocusNode.dispose();
-    phoneFocusNode.dispose();
-    passwordFocusNode.dispose();
-    confirmPasswordFocusNode.dispose();
-    firstNameController.dispose();
-    lastNameController.dispose();
-    phoneController.dispose();
-    passwordController.dispose();
+    _firstNameFocusNode.dispose();
+    _lastNameFocusNode.dispose();
+    _emailFocusNode.dispose();
+    _phoneFocusNode.dispose();
+    _passwordFocusNode.dispose();
+    _confirmPasswordFocusNode.dispose();
+    _firstNameController.dispose();
+    _lastNameController.dispose();
+    _phoneController.dispose();
+    _passwordController.dispose();
     confirmPasswordController.dispose();
     super.dispose();
   }
@@ -121,29 +121,28 @@ class _SignUpCredentialsScreenState extends State<SignUpCredentialsScreen> {
       },
       listener: (context, state) {
         if (state.status == BaseScreenStatus.next) {
-          // RootRouter.of(context)
-          //     ?.push(ScreenInfo(name: ScreenName.signUpCode, params: {'token': state.verificationToken, 'phone': state.phoneValue}));
-          return;
+          RootRouter.of(context)
+              ?.push(ScreenInfo(name: ScreenName.signUpCode, params: {'phone': state.phoneValue}));
         }
         FocusNode? needFocus;
         TextEditingController? needController;
         if (!state.firstNameError.isNone()) {
-          needFocus = firstNameFocusNode;
-          needController = firstNameController;
+          needFocus = _firstNameFocusNode;
+          needController = _firstNameController;
         } else if (!state.lastNameError.isNone()) {
-          needFocus = lastNameFocusNode;
-          needController = lastNameController;
+          needFocus = _lastNameFocusNode;
+          needController = _lastNameController;
         } else if (!state.phoneError.isNone()) {
-          needFocus = phoneFocusNode;
-          needController = phoneController;
+          needFocus = _phoneFocusNode;
+          needController = _phoneController;
         } else if (!state.emailError.isNone()) {
-          needFocus = emailFocusNode;
-          needController = emailController;
+          needFocus = _emailFocusNode;
+          needController = _emailController;
         } else if (!state.passwordError.isNone()) {
-          needFocus = passwordFocusNode;
-          needController = passwordController;
+          needFocus = _passwordFocusNode;
+          needController = _passwordController;
         } else if (!state.confirmError.isNone()) {
-          needFocus = confirmPasswordFocusNode;
+          needFocus = _confirmPasswordFocusNode;
           needController = confirmPasswordController;
         }
         if (needFocus != null && !needFocus.hasFocus) {
@@ -191,8 +190,8 @@ class _SignUpCredentialsScreenState extends State<SignUpCredentialsScreen> {
                                   children: [
                                     Expanded(
                                       child: AppTextField(
-                                        controller: firstNameController,
-                                        focusNode: firstNameFocusNode,
+                                        controller: _firstNameController,
+                                        focusNode: _firstNameFocusNode,
                                         labelText: getStringById(context, StringId.firstName),
                                         errorText: state.firstNameError.getMessage(context),
                                       ),
@@ -200,8 +199,8 @@ class _SignUpCredentialsScreenState extends State<SignUpCredentialsScreen> {
                                     const HorizontalSpace(18.0),
                                     Expanded(
                                       child: AppTextField(
-                                        controller: lastNameController,
-                                        focusNode: lastNameFocusNode,
+                                        controller: _lastNameController,
+                                        focusNode: _lastNameFocusNode,
                                         labelText: getStringById(context, StringId.lastName),
                                         errorText: state.lastNameError.getMessage(context),
                                       ),
@@ -210,8 +209,8 @@ class _SignUpCredentialsScreenState extends State<SignUpCredentialsScreen> {
                                 ),
                                 const VerticalSpace(18.0),
                                 AppTextField(
-                                  controller: emailController,
-                                  focusNode: emailFocusNode,
+                                  controller: _emailController,
+                                  focusNode: _emailFocusNode,
                                   labelText: getStringById(context, StringId.email),
                                   hintText: 'example@gmail.com',
                                   errorText: state.emailError.getMessage(context),
@@ -219,15 +218,15 @@ class _SignUpCredentialsScreenState extends State<SignUpCredentialsScreen> {
                                 ),
                                 const VerticalSpace(18.0),
                                 PhoneNumberTextField(
-                                  controller: phoneController,
-                                  focusNode: phoneFocusNode,
+                                  controller: _phoneController,
+                                  focusNode: _phoneFocusNode,
                                   labelText: getStringById(context, StringId.phoneNumber),
                                   errorText: state.phoneError.getMessage(context),
                                 ),
                                 const VerticalSpace(18.0),
                                 AppTextField(
-                                  controller: passwordController,
-                                  focusNode: passwordFocusNode,
+                                  controller: _passwordController,
+                                  focusNode: _passwordFocusNode,
                                   labelText: getStringById(context, StringId.password),
                                   errorText: state.passwordError.getMessage(context),
                                   obscureText: !_passwordVisible,
@@ -253,7 +252,7 @@ class _SignUpCredentialsScreenState extends State<SignUpCredentialsScreen> {
                                 const VerticalSpace(18.0),
                                 AppTextField(
                                   controller: confirmPasswordController,
-                                  focusNode: confirmPasswordFocusNode,
+                                  focusNode: _confirmPasswordFocusNode,
                                   labelText: getStringById(context, StringId.confirmPassword),
                                   errorText: state.confirmError.getMessage(context),
                                   obscureText: !_confirmPasswordVisible,
@@ -331,8 +330,6 @@ class _SignUpCredentialsScreenState extends State<SignUpCredentialsScreen> {
 
   void _onFinishButtonTap(SignUpCredentialsState state) {
     BlocProvider.of<SignUpCredentialsBloc>(context).add(SignUpPerformEvent());
-    RootRouter.of(context)
-        ?.push(ScreenInfo(name: ScreenName.signUpCode, params: {'phone': state.phoneValue}));
   }
 
   void _changeFieldCursorPosition(FocusNode focusNode, InputFieldType field) {
@@ -347,20 +344,20 @@ class _SignUpCredentialsScreenState extends State<SignUpCredentialsScreen> {
   }
 
   void _updateController(SignUpCredentialsState state) {
-    if (firstNameController.text != state.firstNameValue) {
-      firstNameController.text = state.firstNameValue;
+    if (_firstNameController.text != state.firstNameValue) {
+      _firstNameController.text = state.firstNameValue;
     }
-    if (lastNameController.text != state.lastNameValue) {
-      lastNameController.text = state.lastNameValue;
+    if (_lastNameController.text != state.lastNameValue) {
+      _lastNameController.text = state.lastNameValue;
     }
-    if (phoneController.text != state.phoneValue) {
-      phoneController.text = state.phoneValue;
+    if (_phoneController.text != state.phoneValue) {
+      _phoneController.text = state.phoneValue;
     }
-    if (emailController.text != state.emailValue) {
-      emailController.text = state.emailValue;
+    if (_emailController.text != state.emailValue) {
+      _emailController.text = state.emailValue;
     }
-    if (passwordController.text != state.passwordValue) {
-      passwordController.text = state.passwordValue;
+    if (_passwordController.text != state.passwordValue) {
+      _passwordController.text = state.passwordValue;
     }
     if (confirmPasswordController.text != state.confirmValue) {
       confirmPasswordController.text = state.confirmValue;

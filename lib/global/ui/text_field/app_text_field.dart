@@ -64,6 +64,7 @@ class AppTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFieldDecoration(
       labelText: labelText,
+      errorText: errorText,
       child: TextField(
         onTap: onTap,
         onChanged: onChanged,
@@ -99,9 +100,6 @@ class AppTextField extends StatelessWidget {
           contentPadding: const EdgeInsets.only(top: 14.5, bottom: 14.5, left: 20.0, right: 14.0),
           filled: false,
           alignLabelWithHint: true,
-          errorMaxLines: 1,
-          errorText: errorText,
-          // errorStyle: const TextStyle(fontSize: 0, height: 0),
           hintText: hintText,
           hintStyle: TextStyle(color: AppColors.black.withOpacity(0.4), fontSize: 13.0)
               .montserrat(fontWeight: AppFonts.regular),
