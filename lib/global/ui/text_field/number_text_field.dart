@@ -6,6 +6,8 @@ import 'package:v24_teacher_app/res/colors.dart';
 import 'package:v24_teacher_app/res/fonts.dart';
 import 'package:v24_teacher_app/res/icons.dart';
 
+typedef OnCountryChanged = void Function(String countryName);
+
 class PhoneNumberTextField extends StatelessWidget {
   const PhoneNumberTextField({
     Key? key,
@@ -14,6 +16,7 @@ class PhoneNumberTextField extends StatelessWidget {
     this.borderRadius = 8.0,
     this.controller,
     this.focusNode,
+    this.onCountryChanged,
   }) : super(key: key);
 
   final String? labelText;
@@ -21,6 +24,7 @@ class PhoneNumberTextField extends StatelessWidget {
   final double borderRadius;
   final TextEditingController? controller;
   final FocusNode? focusNode;
+  final OnCountryChanged? onCountryChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +32,7 @@ class PhoneNumberTextField extends StatelessWidget {
       labelText: labelText,
       errorText: errorText,
       child: IntlPhoneField(
-        controller: controller,
+        // controller: controller,
         focusNode: focusNode,
         style: const TextStyle(color: AppColors.black, fontSize: 13.0)
             .montserrat(fontWeight: AppFonts.regular),
@@ -80,10 +84,14 @@ class PhoneNumberTextField extends StatelessWidget {
         dropdownTextStyle: const TextStyle(color: AppColors.black, fontSize: 13.0)
             .montserrat(fontWeight: AppFonts.regular),
         onChanged: (phone) {
+          controller?.text = phone.completeNumber;
           print(phone.completeNumber);
         },
         onCountryChanged: (phone) {
           print('Country code changed to: ' + (phone.countryCode ?? ''));
+          if (onCountryChanged != null) {
+            onCountryChanged!(phone.countryName);
+          }
         },
       ),
     );

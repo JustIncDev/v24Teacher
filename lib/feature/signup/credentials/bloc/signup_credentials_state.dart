@@ -8,7 +8,7 @@ class SignUpCredentialsState extends BaseBlocState {
     this.lastNameError = const FieldError.none(),
     this.emailValue = '',
     this.emailError = const FieldError.none(),
-    this.countryNameValue = 'Russia',
+    this.countryNameValue = '',
     this.phoneValue = '',
     this.phoneError = const FieldError.none(),
     this.passwordValue = '',
@@ -106,5 +106,6 @@ class SignUpCredentialsState extends BaseBlocState {
         confirmError,
         needFocusField,
         status,
+        countryNameValue,
       ];
 }
