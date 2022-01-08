@@ -60,6 +60,11 @@ class SignUpCredentialsBloc extends Bloc<SignUpCredentialsEvent, SignUpCredentia
           ));
         }
         break;
+      case InputFieldType.country:
+        if (event.value != state.countryNameValue) {
+          emit(state.copyWith(countryNameValue: event.value));
+        }
+        break;
       case InputFieldType.password:
         if (event.value != state.passwordValue) {
           emit(state.copyWith(
@@ -112,6 +117,8 @@ class SignUpCredentialsBloc extends Bloc<SignUpCredentialsEvent, SignUpCredentia
           emit(state.copyWith(confirmError: validatePassword(state.confirmValue)));
         }
         break;
+      default:
+        break;
     }
   }
 
@@ -123,6 +130,7 @@ class SignUpCredentialsBloc extends Bloc<SignUpCredentialsEvent, SignUpCredentia
         state.lastNameValue +
         state.emailValue +
         state.phoneValue +
+        state.countryNameValue +
         state.passwordValue +
         state.confirmValue);
     var newState = validationFields(state);

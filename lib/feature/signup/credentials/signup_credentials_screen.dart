@@ -222,6 +222,9 @@ class _SignUpCredentialsScreenState extends State<SignUpCredentialsScreen> {
                                   focusNode: _phoneFocusNode,
                                   labelText: getStringById(context, StringId.phoneNumber),
                                   errorText: state.phoneError.getMessage(context),
+                                  onCountryChanged: (String countryName) {
+                                    _listenInputField(InputFieldType.country, countryName);
+                                  },
                                 ),
                                 const VerticalSpace(18.0),
                                 AppTextField(

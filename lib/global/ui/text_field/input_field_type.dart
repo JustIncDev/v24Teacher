@@ -5,4 +5,5 @@ enum InputFieldType {
   email,
   password,
   confirmPassword,
+  country,
 }
