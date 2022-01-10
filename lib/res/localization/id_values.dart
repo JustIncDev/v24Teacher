@@ -29,6 +29,12 @@ enum StringId {
   changePhone,
   resendCode,
   passwordNotEqualityError,
+  create,
+  manage,
+  explore,
+  onboarding1,
+  onboarding2,
+  onboarding3,
 }
 
 class ForIdValues {
@@ -64,6 +70,12 @@ class ForIdValues {
       StringId.changePhone: 'Change phone',
       StringId.resendCode: 'Resend code',
       StringId.passwordNotEqualityError: 'The confirmation password doesn\'t match',
+      StringId.create: 'Create',
+      StringId.manage: 'Manage',
+      StringId.explore: 'Explore',
+      StringId.onboarding1: 'Create different surveys for getting answers from your students',
+      StringId.onboarding2: 'Manage the answers with convenient tables',
+      StringId.onboarding3: 'Study the statistics of your students\' answers',
     }
   };
 

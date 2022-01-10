@@ -8,6 +8,7 @@ import 'package:v24_teacher_app/global/injector.dart';
 import 'package:v24_teacher_app/global/navigation/screen_info.dart';
 import 'package:v24_teacher_app/global/ui/defocuser.dart';
 import 'package:v24_teacher_app/res/localization/app_localization.dart';
+import 'package:v24_teacher_app/utils/session_state.dart';
 
 import 'global/navigation/root_router.dart';
 
@@ -49,7 +50,11 @@ class _V24TeacherApplicationState extends State<V24TeacherApplication> {
           if (authState.active) {
             _initScreenInfo = const ScreenInfo(name: ScreenName.login);
           } else {
-            _initScreenInfo = const ScreenInfo(name: ScreenName.login);
+            if (!SessionState().getOnboardingFlag()) {
+              _initScreenInfo = const ScreenInfo(name: ScreenName.onboarding);
+            } else {
+              _initScreenInfo = const ScreenInfo(name: ScreenName.login);
+            }
           }
           return Provider<BlocFactory>(
             key: providerKey,
