@@ -1,4 +1,5 @@
 import 'package:v24_teacher_app/global/data_blocs/auth/auth_bloc.dart';
+import 'package:v24_teacher_app/utils/session_state.dart';
 
 class Injector {
   late AuthBloc _authBloc;
@@ -7,6 +8,7 @@ class Injector {
     _authBloc = AuthBloc();
 
     return Future.wait([
+      SessionState().initialize(),
       _authBloc.init(),
     ]).then((value) => this);
   }
